@@ -1,0 +1,186 @@
+[gd_scene load_steps=23 format=3 uid="uid://cog5t0idn0kxi"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_1sjb4"]
+[ext_resource type="Texture2D" uid="uid://corfm1j3a0w3o" path="res://images/bg.png" id="1_lawih"]
+[ext_resource type="Script" path="res://bg.gd" id="2_0y7eb"]
+[ext_resource type="Texture2D" uid="uid://dfnr6ge7ov3m5" path="res://images/jyaga_back.png" id="3_pr8kx"]
+[ext_resource type="Texture2D" uid="uid://ba46cjf33kdxh" path="res://images/jyaga_front.png" id="4_1iahu"]
+[ext_resource type="Texture2D" uid="uid://ktgwsbbppeqf" path="res://images/jyaga_huta1.png" id="5_l7yhv"]
+[ext_resource type="Texture2D" uid="uid://3368qqaaqxbo" path="res://images/jyaga_huta2.png" id="6_csd67"]
+[ext_resource type="Texture2D" uid="uid://b24op25ircag0" path="res://images/marisa_nomal.png" id="7_j0mqf"]
+[ext_resource type="Texture2D" uid="uid://byyyx35smk8b6" path="res://images/reimu_nomal.png" id="8_btsio"]
+[ext_resource type="Texture2D" uid="uid://b1ogrcsmicagb" path="res://images/marisa_lose.png" id="8_xjktj"]
+[ext_resource type="Texture2D" uid="uid://ddwst8kfu1h1q" path="res://images/reimu_lose.png" id="9_r30gy"]
+[ext_resource type="Texture2D" uid="uid://dmskvsje8kqap" path="res://images/telop_start.png" id="11_1xjdm"]
+[ext_resource type="Texture2D" uid="uid://bxiyd2i504cf1" path="res://images/marisa_smile.png" id="12_csqno"]
+[ext_resource type="Texture2D" uid="uid://cbe13i2lwqotd" path="res://images/telop_reimu_lose.png" id="14_11k5r"]
+[ext_resource type="Texture2D" uid="uid://dtoikxshdkrkc" path="res://images/reimu_smile.png" id="15_8tva6"]
+[ext_resource type="Texture2D" uid="uid://gburrwm6vejf" path="res://images/telop_marisa_lose.png" id="17_8v3f7"]
+[ext_resource type="FontFile" uid="uid://du7sibm26ahbj" path="res://font/ロゴたいぷゴシック.otf" id="19_ds7py"]
+[ext_resource type="AudioStream" uid="uid://bxrpuwcqq5m0g" path="res://sound/pui.mp3" id="21_c8rqh"]
+[ext_resource type="AudioStream" uid="uid://4ie1dqcvdgao" path="res://sound/short60.mp3" id="21_s3o6t"]
+[ext_resource type="AudioStream" uid="uid://bq5dt1rrlmui2" path="res://sound/explosion.mp3" id="22_3thje"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dd84j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_xjktj")
+}],
+"loop": true,
+"name": &"lose",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_j0mqf")
+}],
+"loop": true,
+"name": &"nomal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_csqno")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_j0mqf")
+}],
+"loop": true,
+"name": &"win",
+"speed": 2.5
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ur66m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_r30gy")
+}],
+"loop": true,
+"name": &"lose",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_btsio")
+}],
+"loop": true,
+"name": &"nomal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_8tva6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_btsio")
+}],
+"loop": true,
+"name": &"win",
+"speed": 2.5
+}]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_1sjb4")
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(300, 180)
+texture = ExtResource("1_lawih")
+script = ExtResource("2_0y7eb")
+metadata/_edit_lock_ = true
+
+[node name="JyagaBack" type="Sprite2D" parent="."]
+position = Vector2(240, 180)
+texture = ExtResource("3_pr8kx")
+
+[node name="JyagaFront" type="Sprite2D" parent="."]
+position = Vector2(240, 180)
+texture = ExtResource("4_1iahu")
+
+[node name="lid" type="TextureButton" parent="."]
+offset_left = 106.0
+offset_top = 28.0
+offset_right = 372.0
+offset_bottom = 118.0
+focus_mode = 0
+action_mode = 0
+texture_normal = ExtResource("5_l7yhv")
+texture_pressed = ExtResource("6_csd67")
+texture_hover = ExtResource("6_csd67")
+texture_disabled = ExtResource("5_l7yhv")
+texture_focused = ExtResource("6_csd67")
+
+[node name="TelopStart" type="Sprite2D" parent="."]
+position = Vector2(240, 44)
+texture = ExtResource("11_1xjdm")
+
+[node name="Marisa" type="AnimatedSprite2D" parent="."]
+position = Vector2(76, 246)
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_dd84j")
+animation = &"nomal"
+autoplay = "nomal"
+
+[node name="Reimu" type="AnimatedSprite2D" parent="."]
+position = Vector2(425, 246)
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_ur66m")
+animation = &"nomal"
+autoplay = "nomal"
+
+[node name="TelopMarisaLose" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(240, 64)
+texture = ExtResource("17_8v3f7")
+
+[node name="TelopReimuLose" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(240, 64)
+texture = ExtResource("14_11k5r")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(240, 180)
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = 367.0
+offset_top = 12.0
+offset_right = 468.0
+offset_bottom = 34.0
+min_value = 10.0
+max_value = 50.0
+value = 20.0
+
+[node name="Label" type="Label" parent="HSlider"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 21.0
+offset_right = 73.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("19_ds7py")
+text = "20本"
+
+[node name="restart_button" type="Button" parent="."]
+visible = false
+offset_left = 170.0
+offset_top = 270.0
+offset_right = 310.0
+offset_bottom = 320.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "もういちど遊ぶ"
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_s3o6t")
+volume_db = -10.0
+autoplay = true
+
+[node name="pui" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_c8rqh")
+
+[node name="boom" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_3thje")
+
+[connection signal="pressed" from="lid" to="." method="_on_lid_pressed"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
