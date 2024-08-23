@@ -5,12 +5,15 @@ extends Node
 @onready var marisa = $Marisa
 @onready var reimu = $Reimu
 
+signal bom()
+
 
 const STICK = preload("res://stick.tscn") #stickシーンをプリロード　先読み込み
 var tween 
 
 var marisa_scale = Vector2(0.15, 0.15)
 var reimu_scale = Vector2(0.12, 0.12)
+var random_count:int
 
 func _process(delta):
 	if marisa.scale.distance_to(marisa_scale) > 0.01:
@@ -41,10 +44,13 @@ func stick_init():
 		var stick = STICK.instantiate() # プリロードしたSTICKをインスタンス化
 		stick.position.x = -80 + i * (160 / float(stick_count))
 		stick.position.y = -150
-		stick.rotation_degrees = -15.0 + i * (30 / float(stick_count))
-		
+	
 		#add a random position 
 		stick.position += Vector2(randf_range(-10.0,10.0), randf_range(-10.0,10.0))
+		
+		stick.rotation_degrees = -15.0 + i * (30 / float(stick_count))
+		
+		stick.name = str("stick", i)
 		
 		$JyagaBack.add_child(stick)
 		
@@ -55,7 +61,10 @@ func pick_stick():
 	print('picked stick')
 	$pui.play()
 	
-	if randf_range(1, stick_count) == 1:
+	
+	random_count = int(randf_range(1, stick_count))
+	print(str(random_count))
+	if random_count == 1:
 		boom()
 	else:
 		stick_count -= 1
@@ -63,22 +72,32 @@ func pick_stick():
 		
 func boom():
 	print('booooom!!!')
+	bom.emit()
 	$boom.play()
+	$explosion.emitting = true
+	
 	
 	if stick_count % 2 == 0:
 		marisa.animation = "lose"
 		reimu.animation = "win"
-		
+		$TelopMarisaLose.visible = true
 	else:
 		reimu.animation = "lose"
 		marisa.animation = "win"
-	
+		$TelopReimuLose.visible = true
+		
+		
+	# camera moves
 	for i in 20:
 		$Camera2D.offset.x = 240 + randf_range(-10,10)
 		$Camera2D.offset.y = 180 + randf_range(-10,10)
 		await get_tree().create_timer(0.01).timeout
 	
+	# camera center
 	$Camera2D.offset = Vector2(240, 180)
+	
+	# show restart button
+	$restart_button.visible = true
 	
 func change_turn():
 	print('change turn')
@@ -96,3 +115,8 @@ func change_turn():
 func _on_h_slider_value_changed(value):
 	stick_count = value
 	label.text = str(stick_count, "本")
+
+
+func _on_restart_button_pressed():
+	# restart reload
+	get_tree().reload_current_scene()

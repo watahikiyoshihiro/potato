@@ -11,4 +11,14 @@ func _ready():
 	tween.play()
 	
 	
+func _notification(what):
+	# predelete
+	if what == NOTIFICATION_PREDELETE:
+		print('reset')
+		tween.kill()
+	
+	#finish close
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		print('byebye')
+		tween.kill()
 	

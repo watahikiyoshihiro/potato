@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cog5t0idn0kxi"]
+[gd_scene load_steps=26 format=3 uid="uid://cog5t0idn0kxi"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_1sjb4"]
 [ext_resource type="Texture2D" uid="uid://corfm1j3a0w3o" path="res://images/bg.png" id="1_lawih"]
@@ -16,8 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://cbe13i2lwqotd" path="res://images/telop_reimu_lose.png" id="14_11k5r"]
 [ext_resource type="Texture2D" uid="uid://dtoikxshdkrkc" path="res://images/reimu_smile.png" id="15_8tva6"]
 [ext_resource type="Texture2D" uid="uid://gburrwm6vejf" path="res://images/telop_marisa_lose.png" id="17_8v3f7"]
+[ext_resource type="StyleBox" uid="uid://bwpnee8hm3aq0" path="res://new_style_box_flat_light_blue.tres" id="18_75gk3"]
 [ext_resource type="FontFile" uid="uid://du7sibm26ahbj" path="res://font/ロゴたいぷゴシック.otf" id="19_ds7py"]
+[ext_resource type="StyleBox" uid="uid://bveu2op5sxtbl" path="res://new_style_box_flat_pink.tres" id="19_gcua7"]
 [ext_resource type="AudioStream" uid="uid://bxrpuwcqq5m0g" path="res://sound/pui.mp3" id="21_c8rqh"]
+[ext_resource type="PackedScene" uid="uid://vq1qmvcmcxvy" path="res://explosion.tscn" id="21_mmvj2"]
 [ext_resource type="AudioStream" uid="uid://4ie1dqcvdgao" path="res://sound/short60.mp3" id="21_s3o6t"]
 [ext_resource type="AudioStream" uid="uid://bq5dt1rrlmui2" path="res://sound/explosion.mp3" id="22_3thje"]
 
@@ -169,6 +172,12 @@ offset_right = 310.0
 offset_bottom = 320.0
 focus_mode = 0
 theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_styles/hover_pressed_mirrored = ExtResource("18_75gk3")
+theme_override_styles/hover_pressed = ExtResource("18_75gk3")
+theme_override_styles/hover_mirrored = ExtResource("18_75gk3")
+theme_override_styles/hover = ExtResource("18_75gk3")
+theme_override_styles/pressed = ExtResource("18_75gk3")
+theme_override_styles/normal = ExtResource("19_gcua7")
 text = "もういちど遊ぶ"
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
@@ -182,5 +191,9 @@ stream = ExtResource("21_c8rqh")
 [node name="boom" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_3thje")
 
+[node name="explosion" parent="." instance=ExtResource("21_mmvj2")]
+position = Vector2(240, 180)
+
 [connection signal="pressed" from="lid" to="." method="_on_lid_pressed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="restart_button" to="." method="_on_restart_button_pressed"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://vq1qmvcmcxvy"]
+
+[ext_resource type="Texture2D" uid="uid://bnjhni56gtfcm" path="res://fx/fx-7.png" id="1_4m43v"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rsmo5"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="explosion" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_rsmo5")
+emitting = false
+one_shot = true
+texture = ExtResource("1_4m43v")
+emission_shape = 3
+emission_rect_extents = Vector2(120, 90)
+gravity = Vector2(0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.5
