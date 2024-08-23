@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://j05mka5dtyse"]
+[gd_scene load_steps=3 format=3 uid="uid://j05mka5dtyse"]
 
 [ext_resource type="Texture2D" uid="uid://bruwjni1ohld5" path="res://images/stick.png" id="1_r8wx1"]
+[ext_resource type="Script" path="res://stick.gd" id="2_sd2uu"]
 
 [node name="Stick" type="TextureButton" groups=["sticks"]]
 offset_left = -7.0
@@ -8,3 +9,6 @@ offset_right = 7.0
 offset_bottom = 264.0
 pivot_offset = Vector2(7, 132)
 texture_normal = ExtResource("1_r8wx1")
+script = ExtResource("2_sd2uu")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
